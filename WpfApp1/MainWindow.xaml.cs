@@ -20,28 +20,61 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
+        Random rnd = new Random();
+        int firstDiceValue = 0;
+        int secondDiceValue = 0;
         public MainWindow()
         {
             InitializeComponent();
+            firstDiceValue = rnd.Next(1, 33);
+            secondDiceValue = rnd.Next(1, 33);
+            firstDice.Content = "Граней: " + Convert.ToString(firstDiceValue);
+            secondDice.Content = "Граней: " + Convert.ToString(secondDiceValue);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Random rnd = new Random();
-            if (4 < Convert.ToInt32(numberBox.Text) && Convert.ToInt32(numberBox.Text) < 64)
+            if (4 <= Convert.ToInt32(numberBox.Text) && Convert.ToInt32(numberBox.Text) <= 64)
             {
-                int first = rnd.Next(1, 33);
-                int second = rnd.Next(1, 33);
+                int first = rnd.Next(1, firstDiceValue);
+                int second = rnd.Next(1, secondDiceValue);
                 firstCube.Text = Convert.ToString(first);
                 secondCube.Text = Convert.ToString(second);
                 firstLable.Content = "Первое число: " + Convert.ToString(first);
                 secondLable.Content = "Второе число: " + Convert.ToString(second);
                 sumLable.Content = "Сумма: " + Convert.ToString(first + second);
-                resultLabel.Content = "result";
+
+                int firstCycle = 0;
+                int secondCycle = 0;
+                int counter = 0;
+                int allVariables = secondDiceValue * firstDiceValue;
+                if (secondDiceValue > firstDiceValue)
+                {
+                    firstCycle = secondDiceValue;
+                    secondCycle = firstDiceValue;
+                }
+                else
+                {
+                    firstCycle = firstDiceValue;
+                    secondCycle = secondDiceValue;
+                }
+                for (int i = 0; i < firstCycle; i++)
+                {
+                    for (int j = 0; j < secondCycle; j++)
+                    {
+                        if (i + j == Convert.ToInt32(numberBox.Text))
+                        {
+                            counter++;
+                        }
+                    }
+                }
+                double result = (double)counter / (double)allVariables;
+                resultLabel.Content = "вероятность:" + Convert.ToString(result);
             }
             else
             {
-                resultLabel.Content = "Введите число от 2 до 64";
+                resultLabel.Content = "Введите число от 4 до 64";
             }
 
         }

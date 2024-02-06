@@ -18,6 +18,8 @@
             <RowDefinition Height="37*"/>
             <RowDefinition Height="28*"/>
         </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" x:Name="firstDice">Граней:</Label>
+        <Label Grid.Row="0" Grid.Column="2" VerticalAlignment="Bottom" x:Name="secondDice">Граней:</Label>
         <StackPanel Grid.Column="1" Margin="0,56,0,0" Grid.RowSpan="2">
             <Label Grid.Column="1" Grid.RowSpan="2" x:Name="firstLable" FontSize="10">Первый кубик:</Label>
             <Label Grid.Column="1" Grid.Row="1"  x:Name="secondLable" FontSize="10">Второй кубик:</Label>
